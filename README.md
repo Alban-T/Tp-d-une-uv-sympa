@@ -2,6 +2,7 @@
 
 ## Commandes
 * git status //Connaître l'état de votre repertoire
+* git add . //Ajouter les fichier modifiés
 * git pull //Récupérer les datas distante
 * git commit -m "Indiquer ce que votre commit fait" //Exemple "Permet à l'utilisateur d'ajouter un vin"
 * git branch //Connaitre votre branche courante
