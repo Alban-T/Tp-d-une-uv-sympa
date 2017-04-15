@@ -18,29 +18,12 @@ int main()
     }
 	printf("\n");
 
-
-	Matrice_creuse *m1;
+	Matrice_creuse *m1=constructMatCreuse(N,M);
 	constructMat(m1,matrice,N,M);
-	printf("ok on passe a l affichage\n");
-	printf("nb lignes : %d\n",m1->Nlignes);
-	//afficherMat(*m1);
-	//libererMat(*m1);
-	
-	/*Matrice_creuse *m2;
-	m2=NULL;
-	m2=(Matrice_creuse *) malloc(sizeof(Matrice_creuse));
-	//m2=malloc(sizeof(Matrice_creuse));
-	if(m2==NULL) {
-		printf("Erreur d'allocation de m\n");
-		exit(0);
-	}
-	m2->Nlignes=N;
-	m2->Ncolonnes=M;
-	m2->tab=NULL;
-	printf("lignes : %d, Colonnes : %d \n",m2->Nlignes,m2->Ncolonnes );
-	printf("lignes : %d \n",*m2);
-	printf("colonnes : %d \n",*(m2+1));
-	free(m2);*/
+	printf("ok on passe a l affichage\n\n");
+	//printf("nb lignes : %d\n",m1->Nlignes);
+	afficherMat(*m1);
+	libererMat(*m1);
     printf("Hello world!\n");
     return 0;
 }

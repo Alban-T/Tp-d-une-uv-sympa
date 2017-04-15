@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define N 2
-#define M 2
+#define M 3
 
 typedef struct element
 {
@@ -12,10 +12,7 @@ typedef struct element
 	struct element* suivant;
 }Element;
 
-typedef struct liste_ligne
-{
-	Element* ligne;
-}Liste_ligne;
+typedef Element* Liste_ligne;
 
 typedef struct matrice_creuse
 {
@@ -24,7 +21,10 @@ typedef struct matrice_creuse
 	Liste_ligne* tab;
 }Matrice_creuse;
 
+Matrice_creuse* constructMatCreuse(int n,int m);
+Liste_ligne* constructTab(int k);
+Element* constructElement();
 void constructMat(Matrice_creuse *m, int t[N][M],int Nlig, int Ncol);
 void afficherMat(Matrice_creuse m);
-void libererMat(Matrice_creuse *m);
+void libererMat(Matrice_creuse m);
 #endif // TP3_H_INCLUDED
