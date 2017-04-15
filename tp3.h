@@ -19,11 +19,12 @@ typedef struct liste_ligne
 
 typedef struct matrice_creuse
 {
+    int Nlignes;
+    int Ncolonnes;
 	Liste_ligne* tab;
-	int Nlignes;
-	int Ncolonnes;
 }Matrice_creuse;
 
 void constructMat(Matrice_creuse *m, int t[N][M],int Nlig, int Ncol);
 void afficherMat(Matrice_creuse m);
+void libererMat(Matrice_creuse *m);
 #endif // TP3_H_INCLUDED
