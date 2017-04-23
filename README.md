@@ -10,6 +10,3 @@
 * git checkout -b #NomNouvelleBrance //Créer et aller sur une nouvelle branche
 * git push origin #NomDeVotreBranche //Pousse vos data sur le git
 
-## Bonnes pratiques
-* Ne pas commit sur master svp
-* Nom des branches : taskX (X = numéro de la tâche sur le backlog)
