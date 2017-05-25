@@ -28,8 +28,28 @@ void parcours_infixe(Sommet* s);
 
 int rechercheSommet(Arbre* a,int cle);
 
-void compteur(Sommet* s);
+void compteur(Sommet* s,int* c);
 
 int tailleArbre(Arbre* a);
+
+
+typedef struct sommetCompact{
+	struct sommetCompact* fg;
+	struct sommetCompact* fd;
+	struct sommetCompact* pere;
+	int inf;
+	int sup;
+}SommetCompact;
+
+
+typedef struct arbreCompact{
+	SommetCompact* racine;
+}ArbreCompact;
+
+ArbreCompact* initABRCompact();
+
+SommetCompact* creerSommetCompact(int cle);
+
+
 
 #endif // TP4_H_INCLUDED

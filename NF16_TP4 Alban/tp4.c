@@ -93,27 +93,53 @@ int rechercheSommet(Arbre* a,int cle){
 	}
 	if(actuel==NULL)
 		return 0;
-	else 
+	else
 		return 1;
 }
 
-int compteur(Sommet* s){
-	int c;
-	if(actuel!=NULL){
-		compteur(s->fg);
-		return 
-		compteur(s->fd);
+void compteur(Sommet* s,int* c){
+	if(s!=NULL){
+		compteur(s->fg,c);
+		//printf("element compte : %d\n",*c);
+		*c=*c+1;
+		compteur(s->fd,c);
 	}
 }
 
 int tailleArbre(Arbre* a){
-	int tABR,compteur;
+	int tABR=0;
+	int* cmpt;
+	*cmpt=0;
 	tABR=sizeof(Arbre);
-	printf("le nombre d'octet d'espace memoire alloue a l'abr : %d\n",tABR);
+	//printf("le nombre d'octet d'espace memoire alloue a l'abr : %d\n",tABR);
 	Sommet* actuel=a->racine;
-	if(actuel!=NULL){
-		parcours_infixe(s->fg);
-		compteur++;
-		parcours_infixe(s->fd);
+	compteur(actuel,cmpt);
+	//printf("le nombre d'octet d'espace memoire alloue a un sommet : %d\n",sizeof(Sommet));
+	//printf("le nombre d'element de l'abr vaut : %d\n",*cmpt);
+	return *cmpt*sizeof(Sommet)+tABR;
+}
+
+
+ArbreCompact* initABRCompact(){
+	ArbreCompact* newArbre=malloc(sizeof(ArbreCompact));
+	if(!newArbre){
+		printf("Erreur de creation de l'arbre\n");
+		return NULL;
 	}
+	newArbre->racine=NULL;
+	return newArbre;
+}
+
+SommetCompact* creerSommetCompact(int cle){
+	SommetCompact* newSommet=malloc(sizeof(SommetCompact));
+	if(!newSommet){
+		printf("Erreur de creation du sommet\n");
+		return NULL;
+	}
+	newSommet->fg=NULL;
+	newSommet->fd=NULL;
+	newSommet->pere=NULL;
+	newSommet->inf=cle;
+	newSommet->sup=cle;
+	return newSommet;
 }
