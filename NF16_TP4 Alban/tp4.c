@@ -143,3 +143,129 @@ SommetCompact* creerSommetCompact(int cle){
 	newSommet->sup=cle;
 	return newSommet;
 }
+
+SommetCompact* minimum(SommetCompact* s){
+	while(s->fg!=NULL){
+		s=s->fg;
+	}
+	return s;
+}
+
+SommetCompact* maximum(SommetCompact* s){
+	while(s->fd!=NULL){
+		s=s->fd;
+	}
+	return s;
+}
+
+
+void insererElement(ArbreCompact* a, int c){
+	SommetCompact* actuel=a->racine;
+	if(actuel==NULL){
+		a->racine=creerSommetCompact(c);
+		printf("On cree un sommet compact de cle %d\n",c );
+	}
+	else{
+		int test=0;
+		int test1=0;
+		while(test==0 && test1==0){
+			if(actuel->inf > c){
+				if(actuel->inf-1==c){
+					test=1;
+					continue;
+				}
+				else
+					if(actuel->fg==NULL){
+						test1=1;
+						continue;
+					}
+					actuel=actuel->fg;
+			}
+			else{
+				if(actuel->sup >= c){
+					printf("Erreur, element deja existant\n");
+					exit(2);
+				}
+				else{
+					if(actuel->sup+1==c){
+						test=1;
+						continue;
+					}
+					else{
+						if(actuel->fd==NULL){
+							test1=1;
+							continue;
+						}
+						actuel=actuel->fd;
+					}
+				}
+			}
+		}
+		if(test1==1){
+			if(c < actuel->inf){
+				actuel->fg=creerSommetCompact(c);
+				printf("On cree un sommet compact de cle %d\n",c );
+				actuel->fg->pere=actuel;
+			}
+			else{
+				if(c > actuel->sup){
+					actuel->fd=creerSommetCompact(c);
+					printf("On cree un sommet compact de cle %d\n",c );
+					actuel->fd->pere=actuel;
+				}
+				else
+					printf("Erreur, le test ne marche pas\n");
+			}
+		}
+		else{
+			if(actuel->inf-1==c){
+				if(actuel->fg==NULL){
+					actuel->inf=c;
+					printf("On modifie le sommet compact, borne inf : %d, sup : %d\n",actuel->inf,actuel->sup);
+				}
+				else{
+					SommetCompact* pred=maximum(actuel->fg);
+					if(pred->sup+1==c){
+						actuel->inf=pred->inf;
+						if(pred->fg!=NULL)
+							pred->fg->pere=pred->pere;
+						if(pred->pere==actuel)
+							actuel->fg=NULL;
+						else
+							pred->pere->fd=pred->fg;
+						printf("On detruit le sommet compact de borne inf : %d, sup : %d et On modifie le sommet compact, borne inf : %d, sup : %d\n",pred->inf, pred->sup,actuel->inf,actuel->sup);
+						free(pred);
+					}
+					else{
+						actuel->inf=c;
+						printf("On modifie le sommet compact, borne inf : %d, sup : %d\n",actuel->inf,actuel->sup);
+					}
+				}
+			}
+			else{	//if(actuel->sup+1==c)
+				if(actuel->fd==NULL){
+					actuel->sup=c;
+					printf("On modifie le sommet compact, borne inf : %d, sup : %d\n",actuel->inf,actuel->sup);
+				}
+				else{
+					SommetCompact* succ=minimum(actuel->fd);
+					if(succ->inf-1==c){
+						actuel->sup=succ->sup;
+						if(succ->fd!=NULL)
+							succ->fd->pere=succ->pere;
+						if(succ->pere==actuel)
+							actuel->fd=NULL;
+						else
+							succ->pere->fg=succ->fd;
+						printf("On detruit le sommet compact de borne inf : %d, sup : %d et On modifie le sommet compact, borne inf : %d, sup : %d\n",succ->inf, succ->sup,actuel->inf,actuel->sup);
+						free(succ);
+					}
+					else{
+						actuel->sup=c;
+						printf("On modifie le sommet compact, borne inf : %d, sup : %d\n",actuel->inf,actuel->sup);
+					}
+				}
+			}
+		}
+	}
+}

@@ -50,6 +50,11 @@ ArbreCompact* initABRCompact();
 
 SommetCompact* creerSommetCompact(int cle);
 
+SommetCompact* minimum(SommetCompact* s);
+
+SommetCompact* maximum(SommetCompact* s);
+
+void insererElement(ArbreCompact* a, int c);
 
 
 #endif // TP4_H_INCLUDED
