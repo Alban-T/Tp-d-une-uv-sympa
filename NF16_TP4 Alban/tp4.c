@@ -27,7 +27,7 @@ void insererSommet(Arbre* a,Sommet* s){
 	Sommet* actuel=a->racine;
 	if(actuel==NULL){
 		a->racine=s;
-		printf("le sommet inserer est la racine de l'arbre, val=%d\n",s->val);
+		printf("le sommet insere est la racine de l'arbre, val=%d\n",s->val);
 	}
 	else{
 		Sommet* prev=NULL;
@@ -48,7 +48,7 @@ void insererSommet(Arbre* a,Sommet* s){
 				prev->fg=s;
 			else
 				prev->fd=s;
-			printf("vous avez bien inserer le sommet, val=%d, val(pere)=%d\n",s->val,s->pere->val);
+			printf("vous avez bien insere le sommet, val=%d, val(pere)=%d\n",s->val,s->pere->val);
 		}
 	}
 }
@@ -80,6 +80,7 @@ void afficherArbre(Arbre* a){
 }
 
 int rechercheSommet(Arbre* a,int cle){
+	printf("\nOn teste si le sommet de cle %d existe dans l'ABR, 0 faux, 1 vrai --> ",cle);
 	Sommet* actuel=a->racine;
 	if(actuel==NULL){
 		printf("ARBRE NULL !!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
@@ -268,4 +269,72 @@ void insererElement(ArbreCompact* a, int c){
 			}
 		}
 	}
+}
+
+
+void parcours_infixe_compact(SommetCompact* s){
+	if(s!=NULL){
+		parcours_infixe_compact(s->fg);
+		int i=((s->sup)-(s->inf));
+		if(i>=1){
+			//printf("inf : %d\n",s->inf);
+			//printf("sup : %d\n",s->sup);
+			int j=0;
+			for(j=0;j<=i;j++)
+				printf("%d\t",s->inf+j);
+		}
+	else
+		printf("%d\t",s->inf);
+		parcours_infixe_compact(s->fd);
+	}
+}
+
+void afficherArbreCompact(ArbreCompact* a){
+	SommetCompact* actuel=a->racine;
+	if(actuel==NULL)
+		printf("ARBRE NULL !!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+	else{
+		parcours_infixe_compact(actuel);
+	}
+}
+
+int rechercheElement(ArbreCompact* a,int cle){
+	printf("\nOn teste si l'element de cle %d existe dans l'ABR, 0 faux, 1 vrai --> ",cle);
+	SommetCompact* actuel=a->racine;
+	if(actuel==NULL){
+		printf("ARBRE NULL !!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+		return 0;
+	}
+	while(actuel!=NULL && (actuel->inf>cle || actuel->sup<cle)){
+		if(cle<actuel->inf)
+			actuel=actuel->fg;
+		else
+			actuel=actuel->fd;
+	}
+	if(actuel==NULL)
+		return 0;
+	else
+		return 1;
+}
+
+void compteurCompact(SommetCompact* s,int* c){
+	if(s!=NULL){
+		compteurCompact(s->fg,c);
+		//printf("element compte : %d\n",*c);
+		*c=*c+1;
+		compteurCompact(s->fd,c);
+	}
+}
+
+int tailleArbreCompact(ArbreCompact* a){
+	int tABR=0;
+	int* cmpt;
+	*cmpt=0;
+	tABR=sizeof(ArbreCompact);
+	//printf("le nombre d'octet d'espace memoire alloue a l'abr : %d\n",tABR);
+	SommetCompact* actuel=a->racine;
+	compteurCompact(actuel,cmpt);
+	//printf("le nombre d'octet d'espace memoire alloue a un sommet : %d\n",sizeof(SommetCompact));
+	// printf("le nombre d'element de l'abr vaut : %d\n",*cmpt);
+	return *cmpt*sizeof(SommetCompact)+tABR;
 }

@@ -56,5 +56,14 @@ SommetCompact* maximum(SommetCompact* s);
 
 void insererElement(ArbreCompact* a, int c);
 
+void parcours_infixe_compact(SommetCompact* s);
+
+void afficherArbreCompact(ArbreCompact* a);
+
+int rechercheElement(ArbreCompact* a,int cle);
+
+void compteurCompact(SommetCompact* s,int* c);
+
+int tailleArbreCompact(ArbreCompact* a);
 
 #endif // TP4_H_INCLUDED
