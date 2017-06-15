@@ -39,26 +39,26 @@ void insererSommet(Arbre* a,Sommet* s){
 		printf("Le sommet insere est la racine de l'arbre, de valeur %d ! \n",s->val);
 	}
 	else{
-		Sommet* prev = NULL; //va nous servir à garder trace du père du sommet à insérer
-		while(actuel!= NULL){
-			prev = actuel;
-			if(actuel->val < s->val)
-				actuel=actuel->fd; //selon les règles de construction d'un ABR : clé(père) < clé(fils droit)
-			else
-				actuel=actuel->fg; //selon les règles de construction d'un ABR : clé(père) > clé(fils gauche)
-		}
-		if(prev->val == s->val){
-			printf("On ne peut pas avoir 2 fois  la meme valeur dans le meme arbre\n");
-			return;
-		}
-		else{
-			s->pere = prev; //établissement du père de notre sommet à insérer et de son emplacement par rapport à celui-ci
-			if(s->val < prev->val)
-				prev->fg = s;
-			else
-				prev->fd = s;
-			printf("vous avez bien inserer le sommet de valeur %d, dont le pere est %d. \n",s->val,s->pere->val);
-		}
+        int t=rechercheSommet(a,s->val);
+        if(t==1){
+            printf("On ne peut pas avoir 2 fois  la meme valeur dans le meme arbre\n");
+        }
+        else{
+            Sommet* prev = NULL; //va nous servir à garder trace du père du sommet à insérer
+            while(actuel!= NULL){
+                prev = actuel;
+                if(actuel->val < s->val)
+                    actuel=actuel->fd; //selon les règles de construction d'un ABR : clé(père) < clé(fils droit)
+                else
+                    actuel=actuel->fg; //selon les règles de construction d'un ABR : clé(père) > clé(fils gauche)
+            }
+            s->pere = prev; //établissement du père de notre sommet à insérer et de son emplacement par rapport à celui-ci
+            if(s->val < prev->val)
+                prev->fg = s;
+            else
+                prev->fd = s;
+            printf("vous avez bien inserer le sommet de valeur %d, dont le pere est %d. \n",s->val,s->pere->val);
+        }
 	}
 }
 
@@ -317,7 +317,7 @@ void parcours_infixe_compact(SommetCompact* s){
 }
 
 // affiche tous les intervalles d'un arbre compacte triés par ordre croissant
-void afficherArbreCompacte(SommetCompact* s){
+void afficherArbreCompact(SommetCompact* s){
 	SommetCompact* actuel=s;
 	if(actuel==NULL)
 		printf("ARBRE NULL !!! \n");
@@ -379,7 +379,7 @@ void compteurCompact(SommetCompact* s,int* c){
 }
 
 // renvoie le nombre d'octets utilisés pour représenter l'ABR compacte
-int tailleArbreCompacte(ArbreCompact* a){
+int tailleArbreCompact(ArbreCompact* a){
 	int tABR=0;
 	int* cmpt;
 	*cmpt=0;

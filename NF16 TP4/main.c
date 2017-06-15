@@ -106,7 +106,7 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
                           srand((unsigned) time(&t)); // Intializes random number generator
 
                           int j;
-                          for(j=0; j<7; j++){
+                          for(j=0; j<20; j++){
                               insererSommet(ABR1,creerSommet(rand() % 50));
                           }
                           printf("\n Voila des sommets ont ete inseres, maintenant vous pouvez effectue des operations sur votre ABR wouhou ! \n");
@@ -124,13 +124,13 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
 
 
 
-            case '2': printf("Vous avez choisi de construire un ABR compacte ! \n\n");
+            case '2': printf("Vous avez choisi de construire un ABR compact ! \n\n");
 
                       ArbreCompact* ABR2 = initABRCompact();
                       if(deb==1 || deb==4)
                         deb+=2;
                       else
-                        deb=2; //ok un ABR compacte est construit, plus d'inquiétudes
+                        deb=2; //ok un ABR compact est construit, plus d'inquiétudes
 
                       printf("Voulez-vous le remplir vous-meme (tapez 1) ou de facon aleatoire (tapez 2) ?   ");
                       int rep2;
@@ -149,7 +149,7 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
                                     scanf("%d", &value2[v]);
                                     insererElement(ABR2,value2[v]);
                                     }
-                            printf("\n Voila tous vos sommets sont inseres, maintenant vous pouvez effectue des operations sur votre ABR compacte wouhou ! \n");
+                            printf("\n Voila tous vos sommets sont inseres, maintenant vous pouvez effectue des operations sur votre ABR compact wouhou ! \n");
                       }
 
 
@@ -160,10 +160,10 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
                           srand((unsigned) time(&t)); // Intializes random number generator
 
                           int w;
-                          for(w=0; w<7; w++){
+                          for(w=0; w<20; w++){
                               insererElement(ABR2,(rand()%80));
                           }
-                          printf("\n Voila des sommets ont ete inseres, maintenant vous pouvez effectue des operations sur votre ABR compacte wouhou ! \n");
+                          printf("\n Voila des sommets ont ete inseres, maintenant vous pouvez effectue des operations sur votre ABR compact wouhou ! \n");
                       }
 
 
@@ -248,7 +248,7 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
 
 
 
-            case '4': printf("Vous avez choisi de faire des operations sur un ABR compacte ! \n\n");
+            case '4': printf("Vous avez choisi de faire des operations sur un ABR compact ! \n\n");
 
                       if(deb==1 || deb>3){
                         printf("Vous n avez pas constuit d ABR comapcte exploitable pour cette partie encore ...\n"
@@ -286,7 +286,7 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
                       switch(choix3){
 
                           case '1':  printf("\n\n Vous avez choisi d afficher votre ABR (les elements sont tries par ordre croissant), le voici : \n");
-                                     afficherArbreCompacte(ABR2->racine) ;
+                                     afficherArbreCompact(ABR2->racine) ;
                                      break;
 
 
@@ -310,8 +310,8 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
 
                           case '4':  printf("\n\n Vous voulez savoir le nombre d octets utilises pour representer l ABR.\n");
                                      int NbOctects2;
-                                     NbOctects2 = tailleArbreCompacte(ABR2);
-                                     printf("Et bien sachez que pour representer votre ABR compacte il faut %d octects ! \n\n", NbOctects2);
+                                     NbOctects2 = tailleArbreCompact(ABR2);
+                                     printf("Et bien sachez que pour representer votre ABR compact il faut %d octects ! \n\n", NbOctects2);
                                      break;
                       }
                       break;
@@ -326,7 +326,7 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
                         //ABR classique
                         Arbre* ABR3=initABR();
 
-                        // ABR compacte
+                        // ABR compact
                         ArbreCompact* ABR4 = initABRCompact();
 
                         int sommets, i;
@@ -340,9 +340,9 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
                                 insererElement(ABR4,value[i]);
                         }
 
-                        printf("Tout d'abord affichons ces jolis arbres ! \n");
-                        printf("ARBRE CLASSIQUE :   "); afficherArbre(ABR3->racine);
-                        printf("\n ARBRE COMPACTE :   "); afficherArbreCompacte(ABR4->racine) ;
+                        printf("\n\n Tout d'abord affichons ces jolis arbres ! \n");
+                        printf("\n ARBRE CLASSIQUE :   "); afficherArbre(ABR3->racine);
+                        printf("\n\n ARBRE COMPACT :   "); afficherArbreCompact(ABR4->racine) ;
 
 
                         printf("\n\n Maintenant comparons leurs tailles de representation : \n");
@@ -352,8 +352,8 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
                         printf("Et bien sachez que pour representer votre ABR en mode classique il faut %d octects ! \n\n", NbOctects);
 
                         int NbOctects2;
-                        NbOctects2 = tailleArbreCompacte(ABR4);
-                        printf("Et bien sachez que pour representer votre ABR en mode compacte il faut %d octects ! \n\n", NbOctects2);
+                        NbOctects2 = tailleArbreCompact(ABR4);
+                        printf("Et bien sachez que pour representer votre ABR en mode compact il faut %d octects ! \n\n", NbOctects2);
 
                         break;
 
@@ -364,7 +364,7 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
                         // LIBERATION DE LA MEMOIRE ALLOUEE
                         if(deb==1) //seul un ABR a été créé
                             libererArbre(ABR1->racine);
-                        else if(deb==2) // seul un ABR compacte a été créé
+                        else if(deb==2) // seul un ABR compact a été créé
                                 libererArbreCompact(ABR2->racine);
                         else if(deb==4){ // seuls les ABR de comparaison de tailles ont été créés
                                 libererArbre(ABR3->racine);
@@ -375,7 +375,7 @@ printf("\nBonjour %s, amuse toi bien avec les ABR !");
                                 libererArbre(ABR3->racine);
                                 libererArbreCompact(ABR4->racine);
                         }
-                        else if(deb==6){ // 1 ABR compacte et les ABR de comparaisons ont été créés
+                        else if(deb==6){ // 1 ABR compact et les ABR de comparaisons ont été créés
                                 libererArbreCompact(ABR2->racine);
                                 libererArbre(ABR3->racine);
                                 libererArbreCompact(ABR4->racine);

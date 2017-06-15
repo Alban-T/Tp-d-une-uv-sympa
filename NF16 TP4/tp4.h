@@ -79,7 +79,7 @@ int rechercheElement(ArbreCompact* a,int cle); // vérifie si une valeur exsite d
 
 
  void compteurCompact(SommetCompact* s,int* c); // compte le nombre de sommet compacte à partir d'un sommet donné
- int tailleArbreCompacte(ArbreCompact* a); // renvoie le nombre d'octets utilisés pour représenter l'ABR compacte
+ int tailleArbreCompact(ArbreCompact* a); // renvoie le nombre d'octets utilisés pour représenter l'ABR compacte
 
 
 void libererArbreCompact(SommetCompact* s); //libération de la mémoire allouée dynamiquement pour un arbre compacte
